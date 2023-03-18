@@ -8,19 +8,23 @@ body {
 
 body {
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  justify-items: center;
   align-items: center;
 }
 
 .container {
   background-color: white;
   border-radius: 10px;
-  height: min(800px, 75%);
-  width: min(700px, 50%);
-  display: grid;
+  height: 800px;
+  width: 700px;
+  display: none;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 3fr 1fr;
+  grid-column: 1;
+  grid-row: 1;
 }
 
 .container > div {
@@ -72,8 +76,68 @@ body {
   justify-self: center;
 }
 
-@media (max-width: 900px), (max-height: 1000px) {
+/* modal */
+.modal {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(8, 1fr);
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  height: 500px;
+  width: 500px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+label,
+input {
+  grid-column: 1 / span 2;
+  align-self: center;
+}
+
+input {
+  margin-bottom: 20px;
+  height: 30px;
+  width: 200px;
+}
+
+label {
+  font-size: 24px;
+  align-self: end;
+}
+
+.form-read,
+.label-read {
+  grid-row: 7;
+}
+
+.form-read {
+  grid-column: 2;
+}
+
+.form-cancel,
+.form-submit {
+  height: 50px;
+  width: 100px;
+  grid-row: 8;
+  justify-self: start;
+  align-self: center;
+}
+
+.form-cancel {
+  justify-self: end;
+  margin-right: 10px;
+}
+/* modal */
+@media (max-width: 700px), (max-height: 800px) {
   .container {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .modal {
     height: 100%;
     width: 100%;
     border-radius: 0;
