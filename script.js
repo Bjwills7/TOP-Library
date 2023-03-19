@@ -11,6 +11,8 @@ const changeBookLeft = document.querySelector(".left");
 const changeBookRight = document.querySelector(".right");
 const formCancel = document.querySelector(".form-cancel");
 const formSubmit = document.querySelector(".form-submit");
+const markRead = document.querySelector(".card-is-read");
+const removeBookButton = document.querySelector(".remove-book");
 
 // form inputs
 const formTitle = document.querySelector(".form-title");
@@ -25,7 +27,6 @@ changeBookLeft.addEventListener("click", () => {
     return;
   }
   iterator -= 1;
-  console.log(iterator);
   changeCard();
 });
 changeBookRight.addEventListener("click", () => {
@@ -35,7 +36,6 @@ changeBookRight.addEventListener("click", () => {
     return;
   }
   iterator += 1;
-  console.log(iterator);
   changeCard();
 });
 newBookButton.addEventListener("click", () => {
@@ -46,13 +46,16 @@ formCancel.addEventListener("click", () => {
 });
 formSubmit.addEventListener("click", (e) => {
   e.preventDefault();
-  addBook(
-    formTitle.value,
-    formAuthor.value,
-    formPages.value,
-    formRead.checked === true ? "Read" : "Not read"
-  );
+  addBook(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
   closeForm();
+});
+markRead.addEventListener("click", () => {
+  if (!!!myLibrary[iterator]) return;
+  myLibrary[iterator].toggleReadBool();
+  changeCard();
+});
+removeBookButton.addEventListener("click", () => {
+  removeBook();
 });
 
 let titleP = document.querySelector(".title");
@@ -60,7 +63,7 @@ let authorP = document.querySelector(".author");
 let pagesP = document.querySelector(".pages");
 let readP = document.querySelector(".read");
 
-addBook("Beeg Yoshi", "donkey", 1, "has been read");
+addBook("Beeg Yoshi", "donkey", 1, true);
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -80,10 +83,21 @@ function addBook(title, author, pages, read) {
 }
 
 function changeCard() {
-  titleP.textContent = myLibrary[iterator].title;
-  authorP.textContent = myLibrary[iterator].author;
-  pagesP.textContent = myLibrary[iterator].pages;
-  readP.textContent = myLibrary[iterator].read;
+  if (myLibrary.length === 0) {
+    titleP.textContent = "";
+    authorP.textContent = "Add a book with the new book button!";
+    pagesP.textContent = "";
+    readP.textContent = "";
+  } else {
+    titleP.textContent = myLibrary[iterator].title;
+    authorP.textContent = myLibrary[iterator].author;
+    pagesP.textContent = myLibrary[iterator].pages;
+    if (myLibrary[iterator].read) {
+      readP.textContent = "Read";
+    } else {
+      readP.textContent = "Not Read";
+    }
+  }
 }
 
 function openForm() {
@@ -96,7 +110,16 @@ function closeForm() {
   mainContainer.style.display = "grid";
 }
 
-function submitForm() {
-  addBook();
-  closeForm();
+Book.prototype.toggleReadBool = function () {
+  if (this.read) {
+    this.read = false;
+  } else {
+    this.read = true;
+  }
+};
+
+function removeBook() {
+  myLibrary.splice(iterator, 1);
+  if (myLibrary[iterator] === undefined) iterator -= 1;
+  changeCard();
 }

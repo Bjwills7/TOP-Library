@@ -53,7 +53,8 @@ body {
   padding: 10px 10px 10px 10px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(4, 1fr) repeat(2, 0.5fr);
+  justify-items: center;
 }
 
 .card > .title {
@@ -66,6 +67,18 @@ body {
   align-items: center;
   font-size: 24px;
   margin: 0;
+}
+
+.card-is-read {
+  width: 70px;
+  height: 40px;
+}
+
+.remove-book {
+  width: 70px;
+  height: 30px;
+  justify-self: end;
+  align-self: center;
 }
 
 .left,
