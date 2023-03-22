@@ -46,7 +46,8 @@ const formRead = document.querySelector(".form-read");
 newBookButton.addEventListener("click", () => {
   openForm();
 });
-formCancel.addEventListener("click", () => {
+formCancel.addEventListener("click", (e) => {
+  e.preventDefault();
   closeForm();
 });
 formSubmit.addEventListener("click", (e) => {
@@ -56,21 +57,19 @@ formSubmit.addEventListener("click", (e) => {
   changeCard(iterator);
   closeForm();
 });
-markRead.addEventListener("click", () => {
-  if (!!!myLibrary[iterator]) return;
-  myLibrary[iterator].toggleReadBool();
-  changeCard();
-});
-removeBookButton.addEventListener("click", () => {
-  removeBook();
-});
+// markRead.addEventListener("click", () => {
+//   if (!!!myLibrary[iterator]) return;
+//   myLibrary[iterator].toggleReadBool();
+//   changeCard();
+// });
+// removeBookButton.addEventListener("click", () => {
+//   removeBook();
+// });
 
 let titleP = document.querySelector(".title");
 let authorP = document.querySelector(".author");
 let pagesP = document.querySelector(".pages");
 let readP = document.querySelector(".read");
-
-addBook("Beeg Yoshi", "donkey", 1, true);
 
 function Book(title, author, pages, read) {
   this.title = title;
@@ -124,11 +123,11 @@ Book.prototype.toggleReadBool = function () {
   }
 };
 
-function removeBook() {
-  myLibrary.splice(iterator, 1);
-  if (myLibrary[iterator] === undefined) iterator -= 1;
-  changeCard();
-}
+// function removeBook() {
+//   myLibrary.splice(iterator, 1);
+//   if (myLibrary[iterator] === undefined) iterator -= 1;
+//   changeCard();
+// }
 
 // branch refactor stuff
 function createCard() {
@@ -150,6 +149,7 @@ function createCard() {
   newMarkRead.setAttribute("data-index", iterator);
   newMarkRead.textContent = "Mark Read";
   newRemoveBookButton.setAttribute("class", "remove-book");
+  newRemoveBookButton.setAttribute("data-index", iterator);
   newRemoveBookButton.textContent = "Remove";
   titleP = newTitleP; // these need to be redefined in the event listener below
   authorP = newAuthorP;
@@ -160,6 +160,10 @@ function createCard() {
     setActiveElements(e);
     myLibrary[e.target.dataset.index].toggleReadBool();
     changeCard(e.target.dataset.index);
+  });
+  newRemoveBookButton.addEventListener("click", (e) => {
+    myLibrary.splice(e.target.dataset.index, 1);
+    e.target.parentElement.remove();
   });
 }
 
