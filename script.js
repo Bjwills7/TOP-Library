@@ -190,6 +190,16 @@ function createPlaceholder() {
   });
 }
 
+// testing mutation observer
+const mutationObserver = new MutationObserver(entries => {
+  let cards = document.querySelectorAll(".card");
+  if (myLibrary.length < 1 && cards.length < 1) {
+    createPlaceholder();
+  }
+});
+mutationObserver.observe(cardContainer, {childList: true});
+
+// end mutation observer tests
 function setActiveElements(e) {
   readP = e.target.previousElementSibling;
   pagesP = readP.previousElementSibling;
