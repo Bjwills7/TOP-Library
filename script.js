@@ -59,6 +59,9 @@ formSubmit.addEventListener("click", (e) => {
   addBook(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
   createCard();
   changeCard(iterator);
+  if (cards[0].lastChild.classList.value === 'add-card-button') {
+    cards[0].remove();
+  }
   closeForm();
 });
 // markRead.addEventListener("click", () => {
@@ -191,8 +194,9 @@ function createPlaceholder() {
 }
 
 // testing mutation observer
+let cards = document.querySelectorAll(".card");
 const mutationObserver = new MutationObserver(entries => {
-  let cards = document.querySelectorAll(".card");
+  cards = document.querySelectorAll(".card");
   if (myLibrary.length < 1 && cards.length < 1) {
     createPlaceholder();
   }
