@@ -1,6 +1,10 @@
 let myLibrary = [];
 let iterator = 0;
 
+window.onload = () => {
+  createPlaceholder();
+};
+
 // displays
 const mainContainer = document.querySelector(".container");
 const formModal = document.querySelector(".modal");
@@ -65,6 +69,11 @@ formSubmit.addEventListener("click", (e) => {
 // removeBookButton.addEventListener("click", () => {
 //   removeBook();
 // });
+cardContainer.addEventListener("change", () => {
+  if (myLibrary.length < 1) {
+    createPlaceholder();
+  }
+});
 
 let titleP = document.querySelector(".title");
 let authorP = document.querySelector(".author");
@@ -164,6 +173,20 @@ function createCard() {
   newRemoveBookButton.addEventListener("click", (e) => {
     myLibrary.splice(e.target.dataset.index, 1);
     e.target.parentElement.remove();
+  });
+}
+
+// create placeholder card on page load and when library.length === 0
+function createPlaceholder() {
+  let newCard = cardContainer.appendChild(document.createElement("div"));
+  let title = newCard.appendChild(document.createElement("p"));
+  let addCardButton = newCard.appendChild(document.createElement("button"));
+  newCard.setAttribute("class", "card");
+  title.setAttribute("class", "title");
+  title.textContent = "Add a book!";
+  addCardButton.setAttribute("class", "add-card-button");
+  addCardButton.addEventListener("click", () => {
+    openForm();
   });
 }
 
