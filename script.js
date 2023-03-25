@@ -174,6 +174,12 @@ function createCard() {
     changeCard(e.target.dataset.index);
   });
   newRemoveBookButton.addEventListener("click", (e) => {
+    myLibrary.forEach(book => {
+      if (myLibrary.indexOf(book) > e.target.dataset.index) {
+        cardContainer.children[myLibrary.indexOf(book)].querySelector('.card-is-read').dataset.index -= 1;
+        cardContainer.children[myLibrary.indexOf(book)].querySelector('.remove-book').dataset.index -= 1;
+      }
+    })
     myLibrary.splice(e.target.dataset.index, 1);
     e.target.parentElement.remove();
   });
