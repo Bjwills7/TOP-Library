@@ -65,13 +65,13 @@ formSubmit.addEventListener("click", (e) => {
   closeForm();
 });
 // markRead.addEventListener("click", () => {
-//   if (!!!myLibrary[iterator]) return;
-//   myLibrary[iterator].toggleReadBool();
-//   changeCard();
-// });
-// removeBookButton.addEventListener("click", () => {
-//   removeBook();
-// });
+  //   if (!!!myLibrary[iterator]) return;
+  //   myLibrary[iterator].toggleReadBool();
+  //   changeCard();
+  // });
+  // removeBookButton.addEventListener("click", () => {
+    //   removeBook();
+    // });
 cardContainer.addEventListener("change", () => {
   if (myLibrary.length < 1) {
     createPlaceholder();
@@ -136,7 +136,7 @@ Book.prototype.toggleReadBool = function () {
 };
 
 // function removeBook() {
-//   myLibrary.splice(iterator, 1);
+  //   myLibrary.splice(iterator, 1);
 //   if (myLibrary[iterator] === undefined) iterator -= 1;
 //   changeCard();
 // }
@@ -151,24 +151,24 @@ function createCard() {
   let newMarkRead = newCard.appendChild(document.createElement("button"));
   let newRemoveBookButton = newCard.appendChild(
     document.createElement("button")
-  );
-  newCard.setAttribute("class", "card");
-  newTitleP.setAttribute("class", "title");
-  newAuthorP.setAttribute("class", "author");
-  newPagesP.setAttribute("class", "pages");
-  newReadP.setAttribute("class", "read");
-  newMarkRead.setAttribute("class", "card-is-read");
-  newMarkRead.setAttribute("data-index", iterator);
-  newMarkRead.textContent = "Mark Read";
-  newRemoveBookButton.setAttribute("class", "remove-book");
-  newRemoveBookButton.setAttribute("data-index", iterator);
-  newRemoveBookButton.textContent = "Remove";
-  titleP = newTitleP; // these need to be redefined in the event listener below
-  authorP = newAuthorP;
-  pagesP = newPagesP;
-  readP = newReadP;
-  markReadAll = document.querySelectorAll(".card-is-read");
-  newMarkRead.addEventListener("click", (e) => {
+    );
+    newCard.setAttribute("class", "card");
+    newTitleP.setAttribute("class", "title");
+    newAuthorP.setAttribute("class", "author");
+    newPagesP.setAttribute("class", "pages");
+    newReadP.setAttribute("class", "read");
+    newMarkRead.setAttribute("class", "card-is-read");
+    newMarkRead.setAttribute("data-index", iterator);
+    newMarkRead.textContent = "Mark Read";
+    newRemoveBookButton.setAttribute("class", "remove-book");
+    newRemoveBookButton.setAttribute("data-index", iterator);
+    newRemoveBookButton.textContent = "Remove";
+    titleP = newTitleP; // these need to be redefined in the event listener below
+    authorP = newAuthorP;
+    pagesP = newPagesP;
+    readP = newReadP;
+    markReadAll = document.querySelectorAll(".card-is-read");
+    newMarkRead.addEventListener("click", (e) => {
     setActiveElements(e);
     myLibrary[e.target.dataset.index].toggleReadBool();
     changeCard(e.target.dataset.index);
@@ -216,3 +216,9 @@ function setActiveElements(e) {
   authorP = pagesP.previousElementSibling;
   titleP = authorP.previousElementSibling;
 }
+
+formSubmit.click()
+formSubmit.click()
+formSubmit.click()
+formSubmit.click()
+formSubmit.click()
