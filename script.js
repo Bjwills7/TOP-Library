@@ -59,6 +59,9 @@ formSubmit.addEventListener("click", (e) => {
   addBook(formTitle.value, formAuthor.value, formPages.value, formRead.checked);
   createCard();
   changeCard(iterator);
+  if (myLibrary[iterator].read) {
+    document.querySelector(`#cb${iterator}`).checked = true;
+  }
   if (cards[0].lastChild.classList.value === "add-card-button") {
     cards[0].remove();
   }
