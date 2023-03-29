@@ -76,6 +76,7 @@ body {
 }
 
 .card {
+  text-align: center;
   width: 250px;
   height: 300px;
   border: 2px solid rgb(60, 60, 60);
@@ -89,9 +90,15 @@ body {
   grid-column-gap: 10px;
 }
 
+.card > .add-book {
+  grid-row: 3 / span 1;
+  grid-column: 1 / span 2;
+}
+
 .card > .title {
   font-size: 32px;
   grid-row: 1 / span 1;
+  padding: 0 0 10px 0;
 }
 
 .card > .title,

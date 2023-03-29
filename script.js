@@ -20,33 +20,12 @@ const markRead = document.querySelector(".card-is-read");
 let markReadAll = document.querySelectorAll(".card-is-read");
 const removeBookButton = document.querySelector(".remove-book");
 
-//refactoring tests
-//end tests
-
 // form inputs
 const formTitle = document.querySelector(".form-title");
 const formAuthor = document.querySelector(".form-author");
 const formPages = document.querySelector(".form-pages");
 const formRead = document.querySelector(".form-read");
 
-// changeBookLeft.addEventListener("click", () => {
-//   if (myLibrary[iterator - 1] === undefined) {
-//     iterator = myLibrary.length - 1;
-//     changeCard();
-//     return;
-//   }
-//   iterator -= 1;
-//   changeCard();
-// });
-// changeBookRight.addEventListener("click", () => {
-//   if (myLibrary[iterator + 1] === undefined) {
-//     iterator = 0;
-//     changeCard();
-//     return;
-//   }
-//   iterator += 1;
-//   changeCard();
-// });
 newBookButton.addEventListener("click", () => {
   openForm();
 });
@@ -62,19 +41,12 @@ formSubmit.addEventListener("click", (e) => {
   if (myLibrary[iterator].read) {
     document.querySelector(`#cb${iterator}`).checked = true;
   }
-  if (cards[0].lastChild.classList.value === "add-card-button") {
+  if (cards[0].lastChild.classList.value === "add-book") {
     cards[0].remove();
   }
   closeForm();
 });
-// markRead.addEventListener("click", () => {
-//   if (!!!myLibrary[iterator]) return;
-//   myLibrary[iterator].toggleReadBool();
-//   changeCard();
-// });
-// removeBookButton.addEventListener("click", () => {
-//   removeBook();
-// });
+
 cardContainer.addEventListener("change", () => {
   if (myLibrary.length < 1) {
     createPlaceholder();
@@ -103,20 +75,13 @@ function addBook(title, author, pages, read) {
 }
 
 function changeCard(index) {
-  if (myLibrary.length === 0) {
-    titleP.textContent = "";
-    authorP.textContent = "Add a book with the new book button!";
-    pagesP.textContent = "";
-    readP.textContent = "";
+  titleP.textContent = myLibrary[index].title;
+  authorP.textContent = `By: ${myLibrary[index].author}`;
+  pagesP.textContent = `Pages: ${myLibrary[index].pages}`;
+  if (myLibrary[index].read) {
+    readP.textContent = "Read";
   } else {
-    titleP.textContent = myLibrary[index].title;
-    authorP.textContent = myLibrary[index].author;
-    pagesP.textContent = myLibrary[index].pages;
-    if (myLibrary[index].read) {
-      readP.textContent = "Read";
-    } else {
-      readP.textContent = "Not Read";
-    }
+    readP.textContent = "Unread";
   }
 }
 
@@ -137,12 +102,6 @@ Book.prototype.toggleReadBool = function () {
     this.read = true;
   }
 };
-
-// function removeBook() {
-//   myLibrary.splice(iterator, 1);
-//   if (myLibrary[iterator] === undefined) iterator -= 1;
-//   changeCard();
-// }
 
 // branch refactor stuff
 function createCard() {
@@ -204,7 +163,8 @@ function createPlaceholder() {
   newCard.setAttribute("class", "card");
   title.setAttribute("class", "title");
   title.textContent = "Add a book!";
-  addCardButton.setAttribute("class", "add-card-button");
+  addCardButton.textContent = "+";
+  addCardButton.setAttribute("class", "add-book");
   addCardButton.addEventListener("click", () => {
     openForm();
   });
@@ -227,9 +187,3 @@ function setActiveElements(e) {
   authorP = pagesP.previousElementSibling;
   titleP = authorP.previousElementSibling;
 }
-
-formSubmit.click();
-formSubmit.click();
-formSubmit.click();
-formSubmit.click();
-formSubmit.click();
