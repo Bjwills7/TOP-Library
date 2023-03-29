@@ -86,13 +86,13 @@ function changeCard(index) {
 }
 
 function openForm() {
-  mainContainer.style.display = "none";
+  // mainContainer.style.display = "none";
   formModal.style.display = "grid";
 }
 
 function closeForm() {
   formModal.style.display = "none";
-  mainContainer.style.display = "grid";
+  // mainContainer.style.display = "grid";
 }
 
 Book.prototype.toggleReadBool = function () {
