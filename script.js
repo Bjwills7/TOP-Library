@@ -27,6 +27,7 @@ const formPages = document.querySelector(".form-pages");
 const formRead = document.querySelector(".form-read");
 
 newBookButton.addEventListener("click", () => {
+  formRead.checked = false;
   openForm();
 });
 formCancel.addEventListener("click", (e) => {
@@ -86,13 +87,11 @@ function changeCard(index) {
 }
 
 function openForm() {
-  // mainContainer.style.display = "none";
   formModal.style.display = "grid";
 }
 
 function closeForm() {
   formModal.style.display = "none";
-  // mainContainer.style.display = "grid";
 }
 
 Book.prototype.toggleReadBool = function () {
@@ -170,7 +169,6 @@ function createPlaceholder() {
   });
 }
 
-// testing mutation observer
 let cards = document.querySelectorAll(".card");
 const mutationObserver = new MutationObserver((entries) => {
   cards = document.querySelectorAll(".card");
@@ -180,7 +178,6 @@ const mutationObserver = new MutationObserver((entries) => {
 });
 mutationObserver.observe(cardContainer, { childList: true });
 
-// end mutation observer tests
 function setActiveElements(e) {
   readP = e.target.previousElementSibling;
   pagesP = readP.previousElementSibling;

@@ -147,12 +147,12 @@ button:active {
   height: 1em;
   grid-row: 4 / span 1;
   grid-column: 2 / span 1;
-  background-color: rgba(255, 69, 0, 0.5);
+  background-color: rgba(255, 69, 0, 0.1);
   color: rgba(60, 255, 0, 0);
   justify-self: start;
   align-self: center;
   border: 2px solid rgb(199, 53, 0);
-  border-radius: 50%;
+  border-radius: 5px;
 }
 
 .card label:hover,
@@ -171,7 +171,7 @@ button:active {
   align-items: center;
   width: 30px;
   height: 30px;
-  border-radius: 10px;
+  border-radius: 5px;
   color: rgb(190, 190, 190);
   border: 3px solid rgb(100, 69, 0);
   justify-self: end;
@@ -236,12 +236,40 @@ label {
 }
 
 .form-read {
-  grid-column: 2;
-  margin: 0 30px 0 0;
-  width: 30px;
+  grid-row: 7 / span 1;
+  grid-column: 2 / span 1;
+  margin: 0;
+  opacity: 0;
   height: 30px;
-  justify-self: end;
+  width: 30px;
+  justify-self: center;
   align-self: end;
+}
+
+.form-read + label {
+  grid-row: 7 / span 1;
+  grid-column: 2 / span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  align-self: end;
+  height: 30px;
+  width: 30px;
+  background-color: rgba(255, 69, 0, 0.1);
+  color: rgba(60, 255, 0, 0);
+  border: 2px solid rgb(199, 53, 0);
+  border-radius: 5px;
+}
+
+#form-read:hover + label,
+#form-read + label:hover {
+  background-color: rgba(255, 69, 0, 1);
+}
+
+.form-read:checked + label {
+  color: rgba(60, 255, 0, 1);
+  background-color: green;
 }
 
 .form-cancel,
