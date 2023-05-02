@@ -124,14 +124,28 @@ class Card extends Display {
       e.target.parentElement.remove();
     });
   }
+
+  createPlaceholder() {
+    let newCard = display.cardContainer.appendChild(
+      document.createElement("div")
+    );
+    let title = newCard.appendChild(document.createElement("p"));
+    let addCardButton = newCard.appendChild(document.createElement("button"));
+    newCard.setAttribute("class", "card");
+    title.setAttribute("class", "title");
+    title.textContent = "Add a book!";
+    addCardButton.textContent = "+";
+    addCardButton.setAttribute("class", "add-book");
+    addCardButton.addEventListener("click", () => {
+      display.openForm();
+    });
+  }
 }
 
 class Buttons extends UserInterface {
   constructor() {
     super();
     this.newBookButton = document.querySelector(".add-book");
-    this.changeBookLeft = document.querySelector(".left");
-    this.changeBookRight = document.querySelector(".right");
     this.formCancel = document.querySelector(".form-cancel");
     this.formSubmit = document.querySelector(".form-submit");
     this.markRead = document.querySelector(".card-is-read");
@@ -180,8 +194,9 @@ class Inputs extends UserInterface {
   }
 }
 
+let iterator = 0; // used to match book objects to display cards
+
 const library = new Library();
-const book = new Book();
 const display = new Display();
 const card = new Card();
 const buttons = new Buttons();
@@ -189,35 +204,16 @@ const inputs = new Inputs();
 
 buttons.initListeners();
 
-let iterator = 0;
-
 window.onload = () => {
-  createPlaceholder();
+  card.createPlaceholder();
 };
-
-// called on page load and when library.length === 0
-function createPlaceholder() {
-  let newCard = display.cardContainer.appendChild(
-    document.createElement("div")
-  );
-  let title = newCard.appendChild(document.createElement("p"));
-  let addCardButton = newCard.appendChild(document.createElement("button"));
-  newCard.setAttribute("class", "card");
-  title.setAttribute("class", "title");
-  title.textContent = "Add a book!";
-  addCardButton.textContent = "+";
-  addCardButton.setAttribute("class", "add-book");
-  addCardButton.addEventListener("click", () => {
-    display.openForm();
-  });
-}
 
 // checks for DOM changes on cards and creates placeholder if no books are present
 let cards = document.querySelectorAll(".card");
 const mutationObserver = new MutationObserver((entries) => {
   cards = document.querySelectorAll(".card");
   if (library.bookCase.length < 1 && cards.length < 1) {
-    createPlaceholder();
+    card.createPlaceholder();
   }
 });
 mutationObserver.observe(display.cardContainer, { childList: true });
