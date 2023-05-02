@@ -77,18 +77,17 @@ class Card extends Display {
   }
 
   createCard() {
-    let newCard = display.cardContainer.appendChild(
-      document.createElement("div")
-    );
+    // create and append elements
+    let newCard = display.cardContainer.appendChild(document.createElement("div"));
     let newTitleP = newCard.appendChild(document.createElement("p"));
     let newAuthorP = newCard.appendChild(document.createElement("p"));
     let newPagesP = newCard.appendChild(document.createElement("p"));
     let newReadP = newCard.appendChild(document.createElement("p"));
     let newMarkRead = newCard.appendChild(document.createElement("input"));
     let newMarkReadL = newCard.appendChild(document.createElement("label"));
-    let newRemoveBookButton = newCard.appendChild(
-      document.createElement("button")
-    );
+    let newRemoveBookButton = newCard.appendChild(document.createElement("button"));
+
+    // set attributes and text content
     newCard.setAttribute("class", "card");
     newTitleP.setAttribute("class", "title");
     newAuthorP.setAttribute("class", "author");
@@ -103,7 +102,11 @@ class Card extends Display {
     newRemoveBookButton.setAttribute("class", "remove-book");
     newRemoveBookButton.setAttribute("data-index", iterator);
     newRemoveBookButton.textContent = "✖";
+
+    // set active elements to the newly created ones
     this.setActiveElements(newMarkRead);
+
+    // add listeners to new card elements
     newMarkRead.addEventListener("click", (e) => {
       this.setActiveElements(e.target); // needed to ensure the appropriate checkbox is changed
       library.bookCase[e.target.dataset.index].toggleReadBool();
